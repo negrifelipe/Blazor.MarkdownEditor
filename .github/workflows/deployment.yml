@@ -1,0 +1,32 @@
+name: Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+jobs:
+  deploy:
+    name: "NuGet Deployment"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      name: Checkout Repository
+      with:
+        fetch-depth: 0
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+        include-prerelease: true
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Update version
+      run: "sed -i \"s#<Version>0.0.0</Version>#<Version>${{ github.event.inputs.version }}</Version>#\" Feli.Blazor.MarkdownEditor/Feli.Blazor.MarkdownEditor.csproj"        
+    - name: Build
+      run: dotnet build Feli.Blazor.MarkdownEditor/Feli.Blazor.MarkdownEditor.csproj --configuration Release --no-restore
+    - name: Push to NuGet
+      run: dotnet nuget push Feli.Blazor.MarkdownEditor/bin/Release/*.nupkg
+             --api-key ${{ secrets.NUGET_DEPLOY_KEY }}
+             --source https://api.nuget.org/v3/index.json
