@@ -18,7 +18,8 @@
 		 aria-labelledby="nav-editor">
 		<textarea class="form-control border-0 shadow-none"
 				  style="height: @(Height + "px"); resize: none;" 
-				  @bind-value="Content" @bind-value:event="oninput" />
+				  @bind-value="Content" @bind-value:event="oninput" 
+				  placeholder="@Placeholder" />
 	</div>
 	<div class="tab-pane fade" id="tab-preview"
 		 style="height: @(Height + "px"); padding: 0.375rem 0.75rem; overflow-y: auto" role="tabpanel"

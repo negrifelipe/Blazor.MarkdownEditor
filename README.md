@@ -15,6 +15,7 @@ Parameters
 - Content: The content the editor will work with
 - Height: The height of the editor and preview sections
 - InfoText: Some help text. Default: `Styling with Markdown is supported`
+- Placeholder: Some place holder like: `Write description, features, information, etc...`
 
 Methods:
 - GetMarkdown: Gets the markdown text that the user wrote

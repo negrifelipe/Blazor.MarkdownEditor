@@ -14,6 +14,9 @@ namespace Feli.Blazor.MarkdownEditor
         [Parameter]
         public string InfoText { get; set; } = "Styling with Markdown is supported";
 
+        [Parameter]
+        public string Placeholder { get; set; } = string.Empty;
+
         private string _previewContent = string.Empty;
 
         public string GetMarkdown()
